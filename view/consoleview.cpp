@@ -5,21 +5,24 @@ ConsoleView::ConsoleView(QWidget *parent) :
     QPlainTextEdit(parent){
     m_iRcvd                 =0;
     m_strLine               ="";
-    m_chSpacer            =QChar(' ');
-    m_bLocalEchoEn  =true;
+    m_encSetted           =ENC_ASCII;
+    m_chSpacer            =QChar(' ');    
     QPalette                p=palette();
     setMinimumSize(QSize(480,480));
     document()->setMaximumBlockCount(1000);
     p.setColor(QPalette::Base,Qt::black);
     p.setColor(QPalette::Text,Qt::green);
     setPalette(p);
-    insertPlainText(tr("============ WELCOME TO WINDOWS-LINUX TERMINAL  ============\r\n"));
+    insertPlainText(tr("============  WELCOME TO WINDOWS-LINUX TERMINAL  ============\r\n"));
     insertPlainText(tr("========================= WINUX  ==========================\r\n"));
     insertPlainText(tr("out: "));
 }
 
 ConsoleView::~ConsoleView(){
+}
 
+void ConsoleView::changeType(ENCODETYPE typeNew){
+    m_encSetted=typeNew;
 }
 
 void ConsoleView::putData(char *data,int iCnt){
@@ -35,10 +38,6 @@ void ConsoleView::putData(char *data,int iCnt){
         insertPlainText(QString::number(iVal));
         if(!m_chSpacer.isLetter())insertPlainText(m_chSpacer);
     };
-}
-
-void ConsoleView::setLocalEchoEnabled(bool bSet){
-    m_bLocalEchoEn=bSet;
 }
 
 void ConsoleView::clearOld(){
@@ -64,20 +63,16 @@ void ConsoleView::keyPressEvent(QKeyEvent *e){
     case    Qt::Key_Return:
     case    Qt::Key_Enter:
         if(!m_strLine.isEmpty()){
-            emit     sendDataTo(m_strLine.toStdString().c_str());
+            if(m_encSetted==ENC_ASCII)
+                emit     sendDataTo(m_strLine.toStdString().c_str());
             m_iRcvd=0;
         }
         m_strLine.clear();
-        if(m_bLocalEchoEn){
-            QPlainTextEdit::keyPressEvent(e);            
-            insertPlainText(tr("out: "));
-        }
+        QPlainTextEdit::keyPressEvent(e);
+        insertPlainText(tr("out: "));
         break;
     default:        
-        if(m_bLocalEchoEn){
-//            if(m_strLine.isEmpty()) insertPlainText(tr("\r\n")+tr("out: "));
-            QPlainTextEdit::keyPressEvent(e);            
-        }
+        QPlainTextEdit::keyPressEvent(e);
         m_strLine.append(e->text());
     }
 }

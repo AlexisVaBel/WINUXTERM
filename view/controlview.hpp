@@ -6,7 +6,9 @@
 #include <QPushButton>
 #include <QComboBox>
 #include <QCheckBox>
+#include <QRadioButton>
 #include <QStringList>
+#include "./../serial/SerialParams.hpp"
 
 class ControlView : public QWidget
 {
@@ -15,22 +17,24 @@ public:
     explicit ControlView(QWidget *parent = 0);
     ~ControlView();
 signals:
-    void              needToConnect(QString strCom);
+    void              needToConnect(QString strCom, SerialParams prm);
     void              needToSend();
     void              needToRead();
+    void              needCOMList();
 public slots:
     void               connectToPort();
     void               sendToPort();
     void               readFrmPort();
+    void               askCOMList();
 public:
     void                loadCOMList(QStringList lst);
 private:
     QTextEdit      *m_edtCmd;
 
-    QPushButton *m_btnMBUS;
     QPushButton *m_btnCon;
     QPushButton *m_btnSnd;
     QPushButton *m_btnRcv;
+    QPushButton *m_btnGetCOMs;
 
     QComboBox *m_cmbFlow;
     QComboBox *m_cmbData;
@@ -44,8 +48,13 @@ private:
     QCheckBox   *m_chkCR;
     QCheckBox   *m_chkLF;
 
+    QRadioButton *m_radioASCII;
+    QRadioButton *m_radioUTF;
+    QRadioButton *m_radioHEX;
+
     void                  prepareView();
     void                  prepareControls();
+    void                  preparePortParams();
 };
 
 #endif // CONTROLVIEW_HPP

@@ -28,6 +28,7 @@ public:
     void              closeDev();
     void              setDeviceToWork(string strDevName);
     bool              setDevParams( int iBaud, int iDataBits, int iStopBits, int iFlow);
+    bool              setDevParamsGr(SerialParams prm);
     bool              setDevParamsByName(string strDevName, int iBaud, int iDataBits, int iStopBits, int iFlow);
 
     list<string>    getComList();

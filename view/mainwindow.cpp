@@ -40,9 +40,9 @@ void MainWindow::startReading(){
 
 void MainWindow::loadCOMList(){
     QStringList     lst;
-     list<string>    lstCOMs;
+     std::list<std::string>    lstCOMs;
     lstCOMs =m_serial->getComList();
-    for(list<string>::iterator itGo=lstCOMs.begin();itGo!=lstCOMs.end();itGo++){
+    for(std::list<std::string>::iterator itGo=lstCOMs.begin();itGo!=lstCOMs.end();itGo++){
         lst.append(QString::fromAscii(itGo->c_str()));
     }
     m_controls->loadCOMList(lst);
@@ -57,7 +57,6 @@ void MainWindow::prepareView(){
     ltMain->addWidget(m_console);
     ltMain->addWidget(m_controls);
     m_lblMain->setLayout(ltMain);
-
     setCentralWidget(m_lblMain);
     setMinimumSize(800,520);
 }

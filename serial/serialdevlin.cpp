@@ -36,6 +36,10 @@ void SeialDevLin::setDeviceToWork(string strDevName){
     tcflush(m_iFD, TCIOFLUSH);
 }
 
+bool SeialDevLin::setDevParamsGr(SerialParams prm){
+    setDevParams(prm.iBaudRate,prm.iDataBits,prm.iStopBits,prm.iFlowCnt);
+}
+
 bool SeialDevLin::setDevParams(int iBaud, int iDataBits, int iStopBits, int iFlow){
     int iSucs=0;
     struct termios config;
@@ -186,3 +190,6 @@ list<string> SeialDevLin::getComList(){
 std::list<string> SeialDevLin::getDevInfo()
 {
 }
+
+
+

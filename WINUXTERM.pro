@@ -12,7 +12,8 @@ HEADERS += \
     cmn/DataProvider.hpp \
     cntrl/serialwritter.hpp \
     cntrl/serialworker.hpp \
-    cntrl/serialreader.hpp
+    cntrl/serialreader.hpp \
+    cntrl/viewcontroler.hpp
 
 SOURCES += \
     main.cpp \
@@ -22,4 +23,5 @@ SOURCES += \
     serial/serialdevlin.cpp \
     cntrl/serialwritter.cpp \
     cntrl/serialworker.cpp \
-    cntrl/serialreader.cpp
+    cntrl/serialreader.cpp \
+    cntrl/viewcontroler.cpp
