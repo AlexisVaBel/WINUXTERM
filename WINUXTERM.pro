@@ -8,7 +8,7 @@ HEADERS += \
     view/controlview.hpp \
     serial/serialdevlin.hpp \
     serial/serialdevbase.hpp \
-    cmn/SerialParams.hpp \
+    serial/SerialParams.hpp \
     cmn/DataProvider.hpp \
     cntrl/serialwritter.hpp \
     cntrl/serialworker.hpp \

@@ -3,7 +3,7 @@
 
 #include <list>
 #include <string>
-#include "./../cmn/SerialParams.hpp"
+#include "./SerialParams.hpp"
 #include "./../cmn/DataProvider.hpp"
 
 class SerialDevBase:public DataProvider{
