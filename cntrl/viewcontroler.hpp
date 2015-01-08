@@ -5,6 +5,7 @@
 #include "./../view/consoleview.hpp"
 #include "./../view/controlview.hpp"
 #include "../serial/serialdevbase.hpp"
+#include "./../cntrl/serialworker.hpp"
 
 class ViewControler : public QObject
 {
@@ -15,15 +16,26 @@ public:
 signals:
 
 public slots:
-    void                    connectToPort(QString strCom, SerialParams prm);
-    void                    startReadingPort();
-    void                    sendToPort();
+    void                    gotByteFrmPort(char *chBuf,int iCnt);
+
+    void                    gotCmdToConnect(QString strCom, SerialParams prm);
+    void                    gotCmdToRead();
+
+    void                    sendToPort(const char *data);
     void                    loadCOMList();
 
 private:
     SerialDevBase   *m_serial;
+    SerialWorker    *m_worker;
     ConsoleView     *m_viewConsole;
     ControlView     *m_viewControls;
+    bool                    m_bConnected;
+    bool                    m_bReading;
+
+    void                    connectToPort(QString strCom, SerialParams prm);
+    void                    disconnectFrmPort();
+    void                    startReadingPort();
+    void                    stopReadingPort();
 };
 
 #endif // VIEWCONTROLER_HPP

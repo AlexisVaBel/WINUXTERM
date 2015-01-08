@@ -10,7 +10,7 @@ class SerialDevBase:public DataProvider{
 public:
     virtual         std::list<std::string>   getComList()=0;
     virtual         void                                closeDev()=0;
-    virtual         void                                setDeviceToWork(std::string strDevName)=0;
+    virtual         int                                  setDeviceToWork(std::string strDevName)=0;
     virtual         bool                                setDevParams( int iBaud, int iDataBits, int iStopBits, int iFlow)=0;
     virtual         bool                                setDevParamsGr(SerialParams prm)=0;
     virtual         bool                                setDevParamsByName(std::string strDevName, int iBaud, int iDataBits, int iStopBits, int iFlow)=0;

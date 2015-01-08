@@ -30,14 +30,15 @@ void SeialDevLin::closeDev(){
     close(m_iFD);
 }
 
-void SeialDevLin::setDeviceToWork(string strDevName){
-    m_strDev="/dev/"+strDevName;
+int SeialDevLin::setDeviceToWork(string strDevName){
+    m_strDev="/dev/"+strDevName;    
     openDev();
     tcflush(m_iFD, TCIOFLUSH);
+    return m_iFD;
 }
 
 bool SeialDevLin::setDevParamsGr(SerialParams prm){
-    setDevParams(prm.iBaudRate,prm.iDataBits,prm.iStopBits,prm.iFlowCnt);
+    return setDevParams(prm.iBaudRate,prm.iDataBits,prm.iStopBits,prm.iFlowCnt);
 }
 
 bool SeialDevLin::setDevParams(int iBaud, int iDataBits, int iStopBits, int iFlow){
@@ -187,8 +188,10 @@ list<string> SeialDevLin::getComList(){
 }
 
 
-std::list<string> SeialDevLin::getDevInfo()
-{
+std::list<string> SeialDevLin::getDevInfo(){
+    std::list <std::string> lstStr;
+    lstStr.push_front("NoInfo");
+    return lstStr;
 }
 
 

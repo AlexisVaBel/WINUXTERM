@@ -26,7 +26,7 @@ public:
     SeialDevLin();
     ~SeialDevLin();
     void              closeDev();
-    void              setDeviceToWork(string strDevName);
+    int                 setDeviceToWork(string strDevName);
     bool              setDevParams( int iBaud, int iDataBits, int iStopBits, int iFlow);
     bool              setDevParamsGr(SerialParams prm);
     bool              setDevParamsByName(string strDevName, int iBaud, int iDataBits, int iStopBits, int iFlow);

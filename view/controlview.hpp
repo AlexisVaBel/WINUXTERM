@@ -26,8 +26,13 @@ public slots:
     void               sendToPort();
     void               readFrmPort();
     void               askCOMList();
+    void               disableControls();
+    void               enableControls();
+    void               listeningPort();
+    void               unListeningPort();
 public:
     void                loadCOMList(QStringList lst);
+    MsgType        getMsgType();
 private:
     QTextEdit      *m_edtCmd;
 
@@ -55,6 +60,7 @@ private:
     void                  prepareView();
     void                  prepareControls();
     void                  preparePortParams();
+
 };
 
 #endif // CONTROLVIEW_HPP

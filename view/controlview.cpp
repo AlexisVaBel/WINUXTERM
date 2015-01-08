@@ -46,6 +46,13 @@ void ControlView::loadCOMList(QStringList lst){
     m_cmbCOM->addItems(lst);
 }
 
+MsgType ControlView::getMsgType(){
+    if(m_radioASCII->isChecked())  return typeASCII;
+    if(m_radioUTF->isChecked())     return typeUTF;
+    if(m_radioHEX->isChecked())    return typeHEX;
+    return typeNONE;
+}
+
 void ControlView::prepareView(){
     QGroupBox    *gboxCOM       =new QGroupBox();
     QGroupBox    *gboxCRC        =new QGroupBox();
@@ -112,6 +119,7 @@ void ControlView::prepareControls(){
     m_btnSnd        =new QPushButton("Send");
     m_btnRcv        =new QPushButton("Receive");
     m_btnGetCOMs=new QPushButton("Get COM");
+    m_btnRcv->setCheckable(true);
 
     m_chkCRC32  =new QCheckBox("CRC32");
     m_chkCRC16  =new QCheckBox("CRC16");
@@ -142,4 +150,34 @@ void ControlView::preparePortParams(){
 //    m_cmbFlow->addItem("MARK");
 //    m_cmbFlow->addItem("SPACE");
     m_cmbCOM->addItem("COM1");
+}
+
+void ControlView::disableControls(){
+    m_cmbSpeed->setEnabled(false);
+    m_cmbStop->setEnabled(false);
+    m_cmbData->setEnabled(false);
+    m_cmbFlow->setEnabled(false);
+    m_cmbCOM->setEnabled(false);
+    m_btnGetCOMs->setEnabled(false);
+    m_btnCon->setText(tr("disconnect"));
+}
+
+void ControlView::enableControls(){
+    m_cmbSpeed->setEnabled(true);
+    m_cmbStop->setEnabled(true);
+    m_cmbData->setEnabled(true);
+    m_cmbFlow->setEnabled(true);
+    m_cmbCOM->setEnabled(true);
+    m_btnGetCOMs->setEnabled(true);
+    m_btnCon->setText(tr("connect"));
+}
+
+void ControlView::listeningPort(){
+    m_btnRcv->setText(tr("Receiving"));
+    m_btnRcv->setChecked(true);
+}
+
+void ControlView::unListeningPort(){
+    m_btnRcv->setText(tr("Receive"));
+    m_btnRcv->setChecked(false);
 }

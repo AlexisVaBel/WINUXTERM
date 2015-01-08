@@ -1,8 +1,7 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
-#include <list>
-#include <string>
+
 #include <QMainWindow>
 #include "consoleview.hpp"
 #include "controlview.hpp"
@@ -10,6 +9,7 @@
 #include "./../cmn/DataProvider.hpp"
 #include "../serial/serialdevbase.hpp"
 #include "./../cntrl/serialworker.hpp"
+#include "./../cntrl/viewcontroler.hpp"
 
 #include <QLabel>
 
@@ -19,21 +19,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
 
-signals:
-
-public slots:
-    void                    connectToPort(QString strCom);
-    void                    sendData(const char *data);
-    void                    startReading();
-public:
-    void                    loadCOMList();
+signals:    
 private:    
     ConsoleView     *m_console;
     ControlView     *m_controls;
-    SerialDevBase  *m_serial;    
-    SerialWorker    *m_worker;
+    ViewControler *m_viewControl;
+    SerialDevBase  *m_serial;        
     QLabel              *m_lblMain;
     void                    prepareView();
+    void                    prepareElements();
 };
 
 #endif // MAINWINDOW_HPP

@@ -7,4 +7,5 @@ struct SerialParams{
     int iFlowCnt;
 };
 
+enum MsgType{typeNONE=0,typeASCII=1,typeUTF=2,typeHEX=3} ;
 #endif // SERIALPARAMS_HPP
